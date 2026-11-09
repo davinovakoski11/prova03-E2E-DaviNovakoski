@@ -23,12 +23,15 @@
     "clean": "rimraf ./artifacts && mkdirp ./artifacts",
     "format": "prettier --write \"**/**.[jt]s?(x)\"",
     "verify": "prettier --check \"**/**.[jt]s?(x)\"",
-    "scenario": "npx playwright test src/scenarios/NarwalContato.spec.ts --output artifacts/media --workers 1",
-    "test": "npx playwright test --output artifacts/media --workers 4",
-    "debug": "npx playwright test --output artifacts/media --debug --workers 1",
-    "ui": "npx playwright test --output artifacts/media --ui --workers 1",
+    "scenario": "playwright test src/scenarios/GeNoticia.spec.ts",
+    "test": "playwright test",
+    "test:ge": "playwright test",
+    "test:headed": "playwright test --headed",
+    "typecheck": "tsc --noEmit",
+    "debug": "playwright test --debug",
+    "ui": "playwright test --ui",
     "show-report": "npx playwright show-report artifacts/report",
-    "actions": "npx playwright test --output artifacts/media --workers 1",
-    "ci": "npm run clean && npm run format && npm run verify && npm run test"
+    "actions": "playwright test",
+    "ci": "npm run clean && npm run verify && npm run typecheck && npm test"
   }
 }

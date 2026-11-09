@@ -1,16 +1,24 @@
-import { PlaywrightTestConfig } from '@playwright/test';
+import { defineConfig } from '@playwright/test';
 
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   testDir: 'src/scenarios',
+  testMatch: 'Ge*.spec.ts',
+  outputDir: 'artifacts/media',
+  forbidOnly: !!process.env.CI,
+  workers: 1,
   timeout: 120000,
   retries: 0,
   use: {
+    baseURL: 'https://ge.globo.com',
+    browserName: 'chromium',
+    channel: 'chromium',
     trace: 'on',
-    channel: 'msedge',
     locale: 'pt-BR',
     headless: true,
     viewport: { width: 1280, height: 720 },
     ignoreHTTPSErrors: true,
+    actionTimeout: 20000,
+    navigationTimeout: 60000,
     screenshot: 'on',
     video: 'off'
   },
@@ -18,6 +26,7 @@ const config: PlaywrightTestConfig = {
     timeout: 30000
   },
   reporter: [
+    ['list'],
     [
       'html',
       {
@@ -26,5 +35,4 @@ const config: PlaywrightTestConfig = {
       }
     ]
   ]
-};
-export default config;
+});
